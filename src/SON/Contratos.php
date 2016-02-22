@@ -14,7 +14,7 @@ class Contratos
 
     public function listAll()
     {
-        $query = "SELECT co.*,cl.cpf,cl.nome FROM Contratos co INNER JOIN Clientes cl ON co.cliente_id=cl.id ";
+        $query = "SELECT co.*,cl.cpf,cl.nome FROM Contratos co INNER JOIN Clientes cl ON co.cliente_id=cl.id ORDER BY co.id ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
@@ -39,7 +39,7 @@ class Contratos
                 ':codigo' => $data['codigo'],
                 ':contrato' => $data['contrato'],
                 ':cliente_id' => $data['cliente_id'],
-                ':valor' => number_format($data['valor'],2,'.',''),
+                ':valor' => (double) str_replace(',','.',str_replace('.','',$data['valor'])),
                 ':dt' => date('Y-m-d',strtotime($data['data_contrato']))
             ]);
 
@@ -61,7 +61,7 @@ class Contratos
             ':codigo' => $data['codigo'],
             ':contrato' => $data['contrato'],
             ':cliente_id' => $data['cliente_id'],
-            ':valor' => number_format($data['valor'],2,'.',''),
+            ':valor' => (double) str_replace(',','.',str_replace('.','',$data['valor'])),
             ':dt' => date('Y-m-d',strtotime($data['data_contrato']))
         ]);
 

@@ -15,7 +15,7 @@ class Clientes
 
     public function listAll()
     {
-        $query = "SELECT * FROM Clientes";
+        $query = "SELECT * FROM Clientes ORDER BY id";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
 
